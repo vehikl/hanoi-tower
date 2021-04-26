@@ -3,9 +3,9 @@ import {render, screen} from '@testing-library/react';
 import App from './App';
 
 describe('The hanoi tower game', () => {
-  test('it has at least one pole', () => {
+  test('it two poles', () => {
     render(<App />);
-    expect(screen.getByRole('pole')).toBeInTheDocument();
+    expect(screen.getAllByRole('pole')).toHaveLength(2)
   });
 });
 
