@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import Pole from "./Pole";
 
 describe('Pole', () => {
@@ -11,6 +11,16 @@ describe('Pole', () => {
     test('it can have a piece', () => {
         render(<Pole piece={1}/>);
         expect(screen.queryByRole('piece')).toBeInTheDocument()
+    });
+
+    test('it can handle click event', ()=> {
+        const myOnClickHandler = jest.fn();
+        render(<Pole piece={1} onClick={myOnClickHandler}/>);
+
+
+        fireEvent.click(screen.getByRole('pole'));
+
+        expect(myOnClickHandler).toHaveBeenCalled();
     });
 });
 
