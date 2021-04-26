@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IPoleProps {
-    piece: number
+    piece?: number
 }
 
 const Pole: React.FC<IPoleProps> = ({ piece }) => {
