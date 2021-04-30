@@ -6,7 +6,7 @@ function App() {
   return (
    <div style={{ display: "flex" }}>
      Tower of Hanoi
-     <Pole/>
+     <Pole piece={1}/>
 
      <Pole/>
    </div>
