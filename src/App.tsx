@@ -4,7 +4,7 @@ import Pole from "./components/Pole";
 
 function App() {
   return (
-   <div>
+   <div style={{ display: "flex" }}>
      Tower of Hanoi
      <Pole/>
 
