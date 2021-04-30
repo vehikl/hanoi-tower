@@ -7,6 +7,7 @@ function App() {
    <div>
      Tower of Hanoi
      <Pole/>
+
      <Pole/>
    </div>
   );
