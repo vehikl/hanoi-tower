@@ -9,17 +9,17 @@ function App() {
 
     function onFirstPoleClicked() {
         if (!pendingPiece) {
+            setPendingPiece(firstPolePiece);
             setFirstPolePiece(0);
-            setPendingPiece(1);
         } else {
-            setFirstPolePiece(1);
+            setFirstPolePiece(pendingPiece);
             setPendingPiece(0);
         }
     }
 
     function onSecondPoleClicked() {
         if (!pendingPiece) {
-            setPendingPiece(1);
+            setPendingPiece(secondPolePiece);
             setSecondPolePiece(0);
         }
         else{

@@ -31,10 +31,10 @@ describe('The hanoi tower game', () => {
     render(<App />);
     fireEvent.click(screen.getAllByRole('pole')[0])
     fireEvent.click(screen.getAllByRole('pole')[1])
+
     fireEvent.click(screen.getAllByRole('pole')[1])
     fireEvent.click(screen.getAllByRole('pole')[0])
-    const hml = screen.debug();
-    console.log(hml);
+
     const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryByRole('piece')
     const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).queryByRole('piece')
 
