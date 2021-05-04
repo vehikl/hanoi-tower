@@ -26,6 +26,19 @@ describe('The hanoi tower game', () => {
       expect(piecesInSecondPole).toBeInTheDocument()
     })
   })
+
+  test('after moving the piece to the right-most pole, I can bring it back by clicking on the right on the right most pole, then on the left-most pole again', () => {
+    render(<App />);
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+
+    const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).getByRole('piece')
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryByRole('piece')
+    expect(piecesInFirstPole).toBeInTheDocument()
+    // expect(piecesInSecondPole).not.toBeInTheDocument()
+  })
 });
 
 

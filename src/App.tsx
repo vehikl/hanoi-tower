@@ -5,15 +5,27 @@ import Pole from "./components/Pole";
 function App() {
     const [firstPolePiece, setFirstPolePiece] = useState<number>(1);
     const [pendingPiece, setPendingPiece] = useState<number>(0);
-    const [secondPieceNumber, setSecondPieceNumber] = useState(0);
+    const [secondPolePiece, setSecondPolePiece] = useState(0);
 
     function onFirstPoleClicked() {
-        setFirstPolePiece(0);
-        setPendingPiece(1);
+        if (!pendingPiece) {
+            setFirstPolePiece(0);
+            setPendingPiece(1);
+        } else {
+            setFirstPolePiece(1);
+            setPendingPiece(0);
+        }
     }
 
     function onSecondPoleClicked() {
-        setSecondPieceNumber(pendingPiece);
+        if (!pendingPiece) {
+            setPendingPiece(1);
+            setSecondPolePiece(0);
+        }
+        else{
+            setSecondPolePiece(pendingPiece);
+            setPendingPiece(0);
+        }
     }
 
     return (
@@ -24,7 +36,7 @@ function App() {
             </div>
 
             <div data-testid='second-pole'>
-                <Pole piece={secondPieceNumber} onClick={onSecondPoleClicked}/>
+                <Pole piece={secondPolePiece} onClick={onSecondPoleClicked}/>
             </div>
         </div>
     );
