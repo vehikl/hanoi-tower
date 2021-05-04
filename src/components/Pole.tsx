@@ -12,7 +12,6 @@ const Pole: React.FC<IPoleProps> = ({ piece, onClick }) => {
             <div>
                 { piece ? <div role='piece' style={{width: 40, backgroundColor: "red", height: 20}}></div> : null }
             </div>
-
         </div>
     )
 }
