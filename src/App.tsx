@@ -3,40 +3,40 @@ import './App.css';
 import Pole from "./components/Pole";
 
 function App() {
-    const [firstPolePiece, setFirstPolePiece] = useState<number>(1);
-    const [pendingPiece, setPendingPiece] = useState<number>(0);
-    const [secondPolePiece, setSecondPolePiece] = useState(0);
-    const [thirdPolePiece, setThirdPolePiece] = useState(0);
+    const [firstPolePieces, setFirstPolePieces] = useState<number[]>([1]);
+    const [pendingPiece, setPendingPiece] = useState<number|null>(null);
+    const [secondPolePieces, setSecondPolePieces] = useState<number[]>([]);
+    const [thirdPolePieces, setThirdPolePieces] = useState<number[]>([]);
 
     function onFirstPoleClicked() {
         if (!pendingPiece) {
-            setPendingPiece(firstPolePiece);
-            setFirstPolePiece(0);
+            setPendingPiece(firstPolePieces[0]);
+            setFirstPolePieces([]);
         } else {
-            setFirstPolePiece(pendingPiece);
-            setPendingPiece(0);
+            setFirstPolePieces([pendingPiece]);
+            setPendingPiece(null);
         }
     }
 
     function onSecondPoleClicked() {
         if (!pendingPiece) {
-            setPendingPiece(secondPolePiece);
-            setSecondPolePiece(0);
+            setPendingPiece(secondPolePieces[0]);
+            setSecondPolePieces([]);
         }
         else{
-            setSecondPolePiece(pendingPiece);
-            setPendingPiece(0);
+            setSecondPolePieces([pendingPiece]);
+            setPendingPiece(null);
         }
     }
 
     function onThirdPoleClicked() {
         if (!pendingPiece) {
-            setPendingPiece(thirdPolePiece);
-            setThirdPolePiece(0);
+            setPendingPiece(thirdPolePieces[0]);
+            setThirdPolePieces([]);
         }
         else{
-            setThirdPolePiece(pendingPiece);
-            setPendingPiece(0);
+            setThirdPolePieces([pendingPiece]);
+            setPendingPiece(null);
         }
     }
 
@@ -44,15 +44,15 @@ function App() {
         <div style={{display: "flex"}}>
             Tower of Hanoi
             <div data-testid='first-pole'>
-                <Pole piece={firstPolePiece} onClick={onFirstPoleClicked}/>
+                <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked}/>
             </div>
 
             <div data-testid='second-pole'>
-                <Pole piece={secondPolePiece} onClick={onSecondPoleClicked}/>
+                <Pole pieces={secondPolePieces} onClick={onSecondPoleClicked}/>
             </div>
 
             <div data-testid='third-pole'>
-                <Pole piece={thirdPolePiece} onClick={onThirdPoleClicked}/>
+                <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked}/>
             </div>
         </div>
     );
