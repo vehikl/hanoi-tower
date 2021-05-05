@@ -16,14 +16,17 @@ describe('The hanoi tower game', () => {
     expect(withinTheLeftMostPole.getByRole('piece')).toBeInTheDocument();
   });
 
-  describe('since there is a piece in the left most pole', () => {
-    test('it will move that piece to the center pole if I click on the left one and then on the center one', async () => {
+  describe('since there are many pieces in the left most pole', () => {
+    test('it will move a piece to the center pole if I click on the left one and then on the center one', async () => {
       render(<App />);
       fireEvent.click(screen.getAllByRole('pole')[0])
       fireEvent.click(screen.getAllByRole('pole')[1])
 
       const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).getByRole('piece')
       expect(piecesInSecondPole).toBeInTheDocument()
+
+      const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).getByRole('piece')
+      expect(piecesInFirstPole).toBeInTheDocument()
     })
 
     test('it will move that piece to the third pole if I click on the left one and then on the third one', async () => {
@@ -50,6 +53,8 @@ describe('The hanoi tower game', () => {
     expect(piecesInFirstPole).toBeInTheDocument()
     expect(piecesInSecondPole).toBeNull()
   })
+
+
 });
 
 

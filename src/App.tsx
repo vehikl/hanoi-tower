@@ -3,7 +3,7 @@ import './App.css';
 import Pole from "./components/Pole";
 
 function App() {
-    const [firstPolePieces, setFirstPolePieces] = useState<number[]>([1]);
+    const [firstPolePieces, setFirstPolePieces] = useState<number[]>([1, 2, 3]);
     const [pendingPiece, setPendingPiece] = useState<number|null>(null);
     const [secondPolePieces, setSecondPolePieces] = useState<number[]>([]);
     const [thirdPolePieces, setThirdPolePieces] = useState<number[]>([]);
@@ -11,7 +11,9 @@ function App() {
     function onFirstPoleClicked() {
         if (!pendingPiece) {
             setPendingPiece(firstPolePieces[0]);
-            setFirstPolePieces([]);
+            setFirstPolePieces((prev)=>{
+                return prev.slice(1);
+            });
         } else {
             setFirstPolePieces([pendingPiece]);
             setPendingPiece(null);
