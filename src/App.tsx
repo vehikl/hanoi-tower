@@ -6,6 +6,7 @@ function App() {
     const [firstPolePiece, setFirstPolePiece] = useState<number>(1);
     const [pendingPiece, setPendingPiece] = useState<number>(0);
     const [secondPolePiece, setSecondPolePiece] = useState(0);
+    const [thirdPolePiece, setThirdPolePiece] = useState(0);
 
     function onFirstPoleClicked() {
         if (!pendingPiece) {
@@ -28,6 +29,17 @@ function App() {
         }
     }
 
+    function onThirdPoleClicked() {
+        if (!pendingPiece) {
+            setPendingPiece(thirdPolePiece);
+            setThirdPolePiece(0);
+        }
+        else{
+            setThirdPolePiece(pendingPiece);
+            setPendingPiece(0);
+        }
+    }
+
     return (
         <div style={{display: "flex"}}>
             Tower of Hanoi
@@ -37,6 +49,10 @@ function App() {
 
             <div data-testid='second-pole'>
                 <Pole piece={secondPolePiece} onClick={onSecondPoleClicked}/>
+            </div>
+
+            <div data-testid='third-pole'>
+                <Pole piece={thirdPolePiece} onClick={onThirdPoleClicked}/>
             </div>
         </div>
     );
