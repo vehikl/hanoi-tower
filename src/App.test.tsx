@@ -13,7 +13,7 @@ describe('The hanoi tower game', () => {
 
     const withinTheLeftMostPole = within(screen.getAllByRole('pole')[0]);
 
-    expect(withinTheLeftMostPole.getByRole('piece')).toBeInTheDocument();
+    expect(withinTheLeftMostPole.getAllByRole('piece')[0]).toBeInTheDocument();
   });
 
   describe('since there are many pieces in the left most pole', () => {
@@ -22,10 +22,10 @@ describe('The hanoi tower game', () => {
       fireEvent.click(screen.getAllByRole('pole')[0])
       fireEvent.click(screen.getAllByRole('pole')[1])
 
-      const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).getByRole('piece')
+      const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).getAllByRole('piece')[0]
       expect(piecesInSecondPole).toBeInTheDocument()
 
-      const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).getByRole('piece')
+      const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).getAllByRole('piece')[0]
       expect(piecesInFirstPole).toBeInTheDocument()
     })
 
