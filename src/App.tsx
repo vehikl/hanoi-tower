@@ -11,21 +11,25 @@ function App() {
     function onFirstPoleClicked() {
         if (!pendingPiece) {
             setPendingPiece(firstPolePieces[0]);
-            setFirstPolePieces((prev)=>{
-                return prev.slice(1);
-            });
         } else {
+            removePendingPieceFromOtherPoles();
             setFirstPolePieces([pendingPiece]);
             setPendingPiece(null);
         }
     }
 
+    function removePendingPieceFromOtherPoles(){
+        setFirstPolePieces(firstPolePieces.filter(piece => piece !== pendingPiece));
+        setSecondPolePieces(secondPolePieces.filter(piece => piece !== pendingPiece));
+        setThirdPolePieces(thirdPolePieces.filter(piece => piece !== pendingPiece));
+    }
+
     function onSecondPoleClicked() {
         if (!pendingPiece) {
             setPendingPiece(secondPolePieces[0]);
-            setSecondPolePieces([]);
         }
         else{
+            removePendingPieceFromOtherPoles();
             setSecondPolePieces([pendingPiece]);
             setPendingPiece(null);
         }
@@ -34,9 +38,9 @@ function App() {
     function onThirdPoleClicked() {
         if (!pendingPiece) {
             setPendingPiece(thirdPolePieces[0]);
-            setThirdPolePieces([]);
         }
         else{
+            removePendingPieceFromOtherPoles();
             setThirdPolePieces([pendingPiece]);
             setPendingPiece(null);
         }
@@ -46,15 +50,15 @@ function App() {
         <div style={{display: "flex"}}>
             Tower of Hanoi
             <div data-testid='first-pole'>
-                <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked}/>
+                <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked} pendingPieceSize={pendingPiece}/>
             </div>
 
             <div data-testid='second-pole'>
-                <Pole pieces={secondPolePieces} onClick={onSecondPoleClicked}/>
+                <Pole pieces={secondPolePieces} onClick={onSecondPoleClicked} pendingPieceSize={pendingPiece}/>
             </div>
 
             <div data-testid='third-pole'>
-                <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked}/>
+                <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked} pendingPieceSize={pendingPiece}/>
             </div>
         </div>
     );

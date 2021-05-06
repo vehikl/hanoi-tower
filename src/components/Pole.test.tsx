@@ -27,6 +27,23 @@ describe('Pole', () => {
 
         expect(myOnClickHandler).toHaveBeenCalled();
     });
+
+    test('It can consider one of its pieces as pending, given an optional pendingPieceSize prop', () => {
+        const sizeOfPendingPiece = 2;
+        render(<Pole pieces={[sizeOfPendingPiece, 3]}  pendingPieceSize={sizeOfPendingPiece} />);
+
+        let firstPiece = screen.getAllByRole('piece')[0];
+        expect(firstPiece).toHaveAttribute('data-pending', "true");
+    });
+
+    test('Consider that all the pieces have pending as false, if none have been selected', () => {
+        const sizeOfPendingPiece = 2;
+        render(<Pole pieces={[sizeOfPendingPiece, 3]} />);
+        const pieces = screen.getAllByRole('piece');
+        pieces.forEach((piece) => {
+            expect(piece).toHaveAttribute("data-pending", "false");
+        });
+    });
 });
 
 

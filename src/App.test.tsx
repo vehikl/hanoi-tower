@@ -55,6 +55,32 @@ describe('The hanoi tower game', () => {
   })
 
 
+  describe('Pieces follow the Byam Render', () => {
+    test.skip('A piece that is not pending has data-pending set to "false"', () => {
+      render(<App />);
+
+      const unpendingPiece = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')[0]
+
+      expect(unpendingPiece).toHaveAttribute("data-pending", "false");
+    });
+
+    test('when you click a piece on the left pole to move it, it will change colour to indicate a pending piece', () => {
+      render(<App />);
+      fireEvent.click(screen.getAllByRole('pole')[0])
+
+      const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')[0]
+      expect(piecesInFirstPole).toBeInTheDocument()
+      expect(piecesInFirstPole).toHaveAttribute("data-pending", "true");
+    })
+
+  })
+
+  test('when you click a piece it changes it property to reflect that it has been clicked.', () => {
+    render(<App/>);
+
+  })
+
+
 });
 
 
