@@ -74,13 +74,6 @@ describe('The hanoi tower game', () => {
     })
 
   })
-
-  test('when you click a piece it changes it property to reflect that it has been clicked.', () => {
-    render(<App/>);
-
-  })
-
-
 });
 
 
