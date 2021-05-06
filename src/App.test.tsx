@@ -56,7 +56,7 @@ describe('The hanoi tower game', () => {
 
 
   describe('Pieces follow the Byam Render', () => {
-    test.skip('A piece that is not pending has data-pending set to "false"', () => {
+    test('A piece that is not pending has data-pending set to "false"', () => {
       render(<App />);
 
       const unpendingPiece = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')[0]
