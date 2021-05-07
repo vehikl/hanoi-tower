@@ -13,7 +13,9 @@ function App() {
             setPendingPiece(firstPolePieces[0]);
         } else {
             removePendingPieceFromOtherPoles();
-            setFirstPolePieces([pendingPiece]);
+            setFirstPolePieces((prev) => {
+                return [pendingPiece, ...prev];
+            });
             setPendingPiece(null);
         }
     }
@@ -30,7 +32,9 @@ function App() {
         }
         else{
             removePendingPieceFromOtherPoles();
-            setSecondPolePieces([pendingPiece]);
+            setSecondPolePieces((prev) => {
+                return [pendingPiece, ...prev];
+            });
             setPendingPiece(null);
         }
     }
@@ -41,7 +45,9 @@ function App() {
         }
         else{
             removePendingPieceFromOtherPoles();
-            setThirdPolePieces([pendingPiece]);
+            setThirdPolePieces((prev) => {
+                return [pendingPiece, ...prev];
+            });
             setPendingPiece(null);
         }
     }

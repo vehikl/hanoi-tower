@@ -47,11 +47,11 @@ describe('The hanoi tower game', () => {
     fireEvent.click(screen.getAllByRole('pole')[1])
     fireEvent.click(screen.getAllByRole('pole')[0])
 
-    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryByRole('piece')
-    const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).queryByRole('piece')
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+    const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).queryAllByRole('piece')
 
-    expect(piecesInFirstPole).toBeInTheDocument()
-    expect(piecesInSecondPole).toBeNull()
+    expect(piecesInFirstPole).toHaveLength(3)
+    expect(piecesInSecondPole).toHaveLength(0)
   })
 
 
@@ -73,6 +73,50 @@ describe('The hanoi tower game', () => {
       expect(piecesInFirstPole).toHaveAttribute("data-pending", "true");
     })
 
+    test('when you click a piece on the left pole to move to the same one, it contains all the pieces', () => {
+      render(<App />);
+
+      fireEvent.click(screen.getAllByRole('pole')[0])
+      fireEvent.click(screen.getAllByRole('pole')[0])
+
+      const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+
+      expect(piecesInFirstPole).toHaveLength(3)
+    })
+
+    test('second pole respects existing pieces', () => {
+      render(<App />);
+
+      fireEvent.click(screen.getAllByRole('pole')[0])
+      fireEvent.click(screen.getAllByRole('pole')[2])
+      fireEvent.click(screen.getAllByRole('pole')[0])
+      fireEvent.click(screen.getAllByRole('pole')[1])
+      fireEvent.click(screen.getAllByRole('pole')[2])
+      fireEvent.click(screen.getAllByRole('pole')[1])
+
+      const piecesInFirstPole = within(screen.getAllByRole('pole')[1]).queryAllByRole('piece')
+
+      expect(piecesInFirstPole).toHaveLength(2)
+    })
+  })
+
+  test('third pole respects existing pieces', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[2]).queryAllByRole('piece')
+
+    expect(piecesInFirstPole).toHaveLength(2)
   })
 });
 
