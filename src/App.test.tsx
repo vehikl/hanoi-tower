@@ -118,6 +118,58 @@ describe('The hanoi tower game', () => {
 
     expect(piecesInFirstPole).toHaveLength(2)
   })
+
+  test('do not allow a larger piece to stack on a smaller piece on first pole', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+    const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).queryAllByRole('piece')
+
+    expect(piecesInFirstPole).toHaveLength(2)
+    expect(piecesInSecondPole).toHaveLength(1)
+  });
+
+  test('do not allow a larger piece to stack on a smaller piece on second pole', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+    const piecesInSecondPole = within(screen.getAllByRole('pole')[1]).queryAllByRole('piece')
+
+    expect(piecesInFirstPole).toHaveLength(2)
+    expect(piecesInSecondPole).toHaveLength(1)
+  });
+
+  test('do not allow a larger piece to stack on a smaller piece on third pole', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+
+
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+    const piecesInThirdPole = within(screen.getAllByRole('pole')[2]).queryAllByRole('piece')
+
+    expect(piecesInFirstPole).toHaveLength(2)
+    expect(piecesInThirdPole).toHaveLength(1)
+  });
+
+
 });
 
 

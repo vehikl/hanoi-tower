@@ -12,6 +12,9 @@ function App() {
         if (!pendingPiece) {
             setPendingPiece(firstPolePieces[0]);
         } else {
+            if (pendingPiece > firstPolePieces[0]) {
+                return
+            }
             removePendingPieceFromOtherPoles();
             setFirstPolePieces((prev) => {
                 return [pendingPiece, ...prev];
@@ -31,6 +34,9 @@ function App() {
             setPendingPiece(secondPolePieces[0]);
         }
         else{
+            if (pendingPiece > secondPolePieces[0]) {
+                return
+            }
             removePendingPieceFromOtherPoles();
             setSecondPolePieces((prev) => {
                 return [pendingPiece, ...prev];
@@ -44,6 +50,9 @@ function App() {
             setPendingPiece(thirdPolePieces[0]);
         }
         else{
+            if (pendingPiece > thirdPolePieces[0]) {
+                return
+            }
             removePendingPieceFromOtherPoles();
             setThirdPolePieces((prev) => {
                 return [pendingPiece, ...prev];
