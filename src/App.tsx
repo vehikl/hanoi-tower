@@ -3,28 +3,64 @@ import './App.css';
 import Pole from "./components/Pole";
 
 function App() {
-    const [firstPolePiece, setFirstPolePiece] = useState<number>(1);
-    const [pendingPiece, setPendingPiece] = useState<number>(0);
-    const [secondPolePiece, setSecondPolePiece] = useState(0);
+    const [firstPolePieces, setFirstPolePieces] = useState<number[]>([1, 2, 3]);
+    const [pendingPiece, setPendingPiece] = useState<number|null>(null);
+    const [secondPolePieces, setSecondPolePieces] = useState<number[]>([]);
+    const [thirdPolePieces, setThirdPolePieces] = useState<number[]>([]);
 
     function onFirstPoleClicked() {
         if (!pendingPiece) {
-            setPendingPiece(firstPolePiece);
-            setFirstPolePiece(0);
+            setPendingPiece(firstPolePieces[0]);
         } else {
-            setFirstPolePiece(pendingPiece);
-            setPendingPiece(0);
+            if (pendingPiece > firstPolePieces[0]) {
+                setPendingPiece(null);
+                return;
+            }
+            removePendingPieceFromOtherPoles();
+            setFirstPolePieces((prev) => {
+                return [pendingPiece, ...prev];
+            });
+            setPendingPiece(null);
         }
+    }
+
+    function removePendingPieceFromOtherPoles(){
+        setFirstPolePieces(firstPolePieces.filter(piece => piece !== pendingPiece));
+        setSecondPolePieces(secondPolePieces.filter(piece => piece !== pendingPiece));
+        setThirdPolePieces(thirdPolePieces.filter(piece => piece !== pendingPiece));
     }
 
     function onSecondPoleClicked() {
         if (!pendingPiece) {
-            setPendingPiece(secondPolePiece);
-            setSecondPolePiece(0);
+            setPendingPiece(secondPolePieces[0]);
         }
         else{
-            setSecondPolePiece(pendingPiece);
-            setPendingPiece(0);
+            if (pendingPiece > secondPolePieces[0]) {
+                setPendingPiece(null);
+                return
+            }
+            removePendingPieceFromOtherPoles();
+            setSecondPolePieces((prev) => {
+                return [pendingPiece, ...prev];
+            });
+            setPendingPiece(null);
+        }
+    }
+
+    function onThirdPoleClicked() {
+        if (!pendingPiece) {
+            setPendingPiece(thirdPolePieces[0]);
+        }
+        else{
+            if (pendingPiece > thirdPolePieces[0]) {
+                setPendingPiece(null);
+                return
+            }
+            removePendingPieceFromOtherPoles();
+            setThirdPolePieces((prev) => {
+                return [pendingPiece, ...prev];
+            });
+            setPendingPiece(null);
         }
     }
 
@@ -32,11 +68,15 @@ function App() {
         <div style={{display: "flex"}}>
             Tower of Hanoi
             <div data-testid='first-pole'>
-                <Pole piece={firstPolePiece} onClick={onFirstPoleClicked}/>
+                <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked} pendingPieceSize={pendingPiece}/>
             </div>
 
             <div data-testid='second-pole'>
-                <Pole piece={secondPolePiece} onClick={onSecondPoleClicked}/>
+                <Pole pieces={secondPolePieces} onClick={onSecondPoleClicked} pendingPieceSize={pendingPiece}/>
+            </div>
+
+            <div data-testid='third-pole'>
+                <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked} pendingPieceSize={pendingPiece}/>
             </div>
         </div>
     );

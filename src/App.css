@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+
+[data-pending="true"] {
+  background-color: green;
+}
+
+[data-pending="false"] {
+  background-color: red;
+}
