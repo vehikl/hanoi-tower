@@ -13,7 +13,8 @@ function App() {
             setPendingPiece(firstPolePieces[0]);
         } else {
             if (pendingPiece > firstPolePieces[0]) {
-                return
+                setPendingPiece(null);
+                return;
             }
             removePendingPieceFromOtherPoles();
             setFirstPolePieces((prev) => {
@@ -35,6 +36,7 @@ function App() {
         }
         else{
             if (pendingPiece > secondPolePieces[0]) {
+                setPendingPiece(null);
                 return
             }
             removePendingPieceFromOtherPoles();
@@ -51,6 +53,7 @@ function App() {
         }
         else{
             if (pendingPiece > thirdPolePieces[0]) {
+                setPendingPiece(null);
                 return
             }
             removePendingPieceFromOtherPoles();

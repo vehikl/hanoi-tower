@@ -169,7 +169,48 @@ describe('The hanoi tower game', () => {
     expect(piecesInThirdPole).toHaveLength(1)
   });
 
+  test('when move not allowed when clicking first pole revert color', () => {
+    render(<App />);
 
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+
+    const piecesInThirdPole = within(screen.getAllByRole('pole')[2]).queryAllByRole('piece')
+
+    expect(piecesInThirdPole[0]).toHaveAttribute('data-pending', "false")
+  });
+
+  test('when move not allowed when clicking second pole revert color', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[1])
+
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+
+    expect(piecesInFirstPole[0]).toHaveAttribute('data-pending', "false")
+  });
+
+  test('when move not allowed when clicking third pole revert color', () => {
+    render(<App />);
+
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+    fireEvent.click(screen.getAllByRole('pole')[0])
+    fireEvent.click(screen.getAllByRole('pole')[2])
+
+    const piecesInFirstPole = within(screen.getAllByRole('pole')[0]).queryAllByRole('piece')
+
+    expect(piecesInFirstPole[0]).toHaveAttribute('data-pending', "false")
+  });
 });
 
 
