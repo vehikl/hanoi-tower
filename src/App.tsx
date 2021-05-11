@@ -7,6 +7,7 @@ function App() {
     const [firstPolePieces, setFirstPolePieces] = useState<number[]>([1, 2, 3]);
     const [secondPolePieces, setSecondPolePieces] = useState<number[]>([]);
     const [thirdPolePieces, setThirdPolePieces] = useState<number[]>([]);
+    const [numberOfPieces, setNumberOfPieces] = useState(3)
 
     function onFirstPoleClicked() {
         if (!pendingPiece) {
@@ -65,18 +66,35 @@ function App() {
     }
 
     return (
-        <div style={{display: "flex"}}>
+        <div>
             Tower of Hanoi
-            <div data-testid='first-pole'>
-                <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked} pendingPieceSize={pendingPiece}/>
+
+            <div style={{display: "flex"}}>
+                <div data-testid='first-pole'>
+                    <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked} pendingPieceSize={pendingPiece}/>
+                </div>
+
+                <div data-testid='second-pole'>
+                    <Pole pieces={secondPolePieces} onClick={onSecondPoleClicked} pendingPieceSize={pendingPiece}/>
+                </div>
+
+                <div data-testid='third-pole'>
+                    <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked} pendingPieceSize={pendingPiece}/>
+                </div>
             </div>
 
-            <div data-testid='second-pole'>
-                <Pole pieces={secondPolePieces} onClick={onSecondPoleClicked} pendingPieceSize={pendingPiece}/>
-            </div>
-
-            <div data-testid='third-pole'>
-                <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked} pendingPieceSize={pendingPiece}/>
+            <div>
+                <input role='input-box'
+                       id='input-box'
+                       type="number"
+                       value={numberOfPieces}
+                       onChange={(e) => {
+                           setNumberOfPieces(Number(e.target.value));
+                       }}/>
+                <button role='piece-adjustment' style={{}} onClick={() => {
+                    let newStartingPieces = Array.from({length: numberOfPieces}, (_, i) => i+1);
+                    setFirstPolePieces(newStartingPieces);
+                }}>Save</button>
             </div>
         </div>
     );

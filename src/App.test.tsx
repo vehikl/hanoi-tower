@@ -211,6 +211,18 @@ describe('The hanoi tower game', () => {
 
     expect(piecesInFirstPole[0]).toHaveAttribute('data-pending', "false")
   });
+
+  test('The amount of pieces will only change when you press the button', () => {
+    render(<App />);
+
+    let desiredNumberOfPieces = 7;
+    fireEvent.input(screen.getByRole('input-box'), {target: {value: desiredNumberOfPieces}});
+    fireEvent.click(screen.getByRole('piece-adjustment'));
+
+    const leftMostPole = screen.getAllByRole('pole')[0];
+
+    expect(within(leftMostPole).getAllByRole('piece')).toHaveLength(desiredNumberOfPieces);
+  });
 });
 
 
