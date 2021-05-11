@@ -10,7 +10,7 @@ interface IPoleProps {
 const Pole: React.FC<IPoleProps> = ({ pieces, onClick , pendingPieceSize}) => {
 
     return (
-        <div role='pole' onClick={onClick} style={{ margin: 40, width: 20, backgroundColor: "orange", height: 80, display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center"}}>
+        <div role='pole' onClick={onClick} style={{ margin: 40, width: 20, backgroundColor: "orange", height: '100%', display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center"}}>
             <div>
                 {
                     pieces.map((size, index) => {

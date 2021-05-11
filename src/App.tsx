@@ -66,10 +66,22 @@ function App() {
     }
 
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: 'column'}}>
             Tower of Hanoi
 
-            <div style={{display: "flex"}}>
+            <div>
+                <input role='input-box'
+                       id='input-box'
+                       type="number"
+                       value={numberOfPieces}
+                       onChange={(e) => {
+                           setNumberOfPieces(Number(e.target.value));
+                           let newStartingPieces = Array.from({length: numberOfPieces}, (_, i) => i+1);
+                           setFirstPolePieces(newStartingPieces);
+                       }}/>
+            </div>
+
+            <div style={{display: "flex", height:  5 + (22 * numberOfPieces)}}>
                 <div data-testid='first-pole'>
                     <Pole pieces={firstPolePieces} onClick={onFirstPoleClicked} pendingPieceSize={pendingPiece}/>
                 </div>
@@ -81,21 +93,9 @@ function App() {
                 <div data-testid='third-pole'>
                     <Pole pieces={thirdPolePieces} onClick={onThirdPoleClicked} pendingPieceSize={pendingPiece}/>
                 </div>
+
             </div>
 
-            <div>
-                <input role='input-box'
-                       id='input-box'
-                       type="number"
-                       value={numberOfPieces}
-                       onChange={(e) => {
-                           setNumberOfPieces(Number(e.target.value));
-                       }}/>
-                <button role='piece-adjustment' style={{}} onClick={() => {
-                    let newStartingPieces = Array.from({length: numberOfPieces}, (_, i) => i+1);
-                    setFirstPolePieces(newStartingPieces);
-                }}>Save</button>
-            </div>
         </div>
     );
 }
