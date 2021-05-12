@@ -75,8 +75,9 @@ function App() {
                        type="number"
                        value={numberOfPieces}
                        onChange={(e) => {
-                           setNumberOfPieces(Number(e.target.value));
-                           let newStartingPieces = Array.from({length: numberOfPieces}, (_, i) => i+1);
+                           let newNumberOfPieces = Number(e.target.value);
+                           setNumberOfPieces(newNumberOfPieces);
+                           let newStartingPieces = Array.from({length: newNumberOfPieces}, (_, i) => i+1);
                            setFirstPolePieces(newStartingPieces);
                        }}/>
             </div>

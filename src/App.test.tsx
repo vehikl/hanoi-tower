@@ -216,8 +216,7 @@ describe('The hanoi tower game', () => {
     render(<App />);
 
     let desiredNumberOfPieces = 7;
-    fireEvent.input(screen.getByRole('input-box'), {target: {value: desiredNumberOfPieces}});
-    fireEvent.click(screen.getByRole('piece-adjustment'));
+    fireEvent.change(screen.getByRole('input-box'), {target: {value: desiredNumberOfPieces}});
 
     const leftMostPole = screen.getAllByRole('pole')[0];
 
